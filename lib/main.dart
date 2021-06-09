@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:scan_and_generate_qr_code/pages/WebPage.dart';
 import 'package:scan_and_generate_qr_code/pages/create_qr_code.dart';
 import 'package:scan_and_generate_qr_code/pages/scan_qr_code.dart';
 
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      routes: {
+        'web': (context) => WebViewExample(),
+      },
       title: 'Scan and Create QR Code',
       theme: ThemeData(
         primarySwatch: Colors.blue,

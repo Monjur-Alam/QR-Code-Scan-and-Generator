@@ -10,50 +10,18 @@ class ScanQRCode extends StatefulWidget {
 }
 
 class _ScanQRCodeState extends State<ScanQRCode> {
-  String qrCode = 'Unknown data ';
+
+  @override
+  void initState() {
+    scanQrCode();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Scan QR Code"),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              qrCode,
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white60,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            Text(
-              '---',
-              style: TextStyle(
-                  fontSize: 16,
-                  color: Colors.white60,
-                  fontWeight: FontWeight.bold),
-            ),
-            SizedBox(
-              height: 8,
-            ),
-            RaisedButton(
-              onPressed: () {
-                scanQrCode();
-              },
-              textColor: Colors.white,
-              color: Colors.blue,
-              padding: const EdgeInsets.all(10.0),
-              child: const Text('  Strat Scanning    ',
-                  style: TextStyle(fontSize: 20)),
-            )
-          ],
-        ),
       ),
     );
   }
@@ -69,11 +37,10 @@ class _ScanQRCodeState extends State<ScanQRCode> {
 
       if (!mounted) return;
 
-      setState(() {
-        this.qrCode = qrCode;
-      });
+      Navigator.pushNamed(context, 'web',
+          arguments: {"url": qrCode});
     } on PlatformException {
-      qrCode = 'Failed to get platform version.';
+      print('Failed to get platform version.');
     }
   }
 }
